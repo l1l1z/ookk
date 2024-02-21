@@ -1,31 +1,12 @@
-name: hello-github-actions  
-on:  
-  push:  
-    branches:  
-      - master  
+name: PrintName  
+on: push # 假设您想要在每次 push 时触发这个 workflow  
+  
 jobs:  
-  build:  
-    runs-on: ubuntu-latest  
+  print-name:  
+    runs-on: ubuntu-latest # 指定在何种环境中运行这个 job  
     steps:  
-      - name: checkout_actions  
-        uses: actions/checkout@v2  
-  
-      - name: setup-node  
-        uses: actions/setup-node@v1  
-        with:  
-          node-version: '14'  
-  
-      - name: npm install and build  
-        run: |  
-          npm install  
-          npm run build  
-  
-      - name: Commit and Push  
-        run: |  
-          git config --global user.email "2735070081@qq.com"  
-          git config --global user.name "l1l1z"  
-          git add .  
-          git commit -m "Updates made by Github Actions" -a  
-          git push
-        env:
-          email: 2735070081@qq.com
+      - name: Print a name  
+        env: # 定义环境变量  
+          name: "zhangsan" # 注意这里使用英文冒号  
+        run: | # 定义要运行的命令  
+          echo $name # 打印环境变量 name 的值
